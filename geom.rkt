@@ -18,12 +18,22 @@
   (vec (* s (vec-x v))
        (* s (vec-y v))))
 
+(define (vabs v)
+  (vec (abs (vec-x v))
+       (abs (vec-y v))))
+
 (define (dot v1 v2)
   (+ (* (vec-x v1)
         (vec-x v2))
      (* (vec-y v1)
         (vec-y v2))))
+(define (vrot p theta)
+  (vec (dot (vec (cos theta) (sin theta)) p)
+       (dot (vec (- (sin theta)) (cos theta)) p)))
 
+       
+
+          
 (define (square x)
   (* x x))
 (define (magnitude v)
@@ -88,6 +98,8 @@
          v-
          vs
          dot
+         vabs
+         vrot
          magnitude
          norm
          square

@@ -19,8 +19,10 @@
   (define current-frame 0)
 
   (define (paint-canvas canvas dc)
-     (let-values ([(w h) (send canvas get-client-size)])
-       (draw dc w h (elapsed-time))))
+    (let-values ([(w h) (send canvas get-client-size)]
+                 [(transform) (send dc get-transformation)])
+      (draw dc w h (elapsed-time))
+            (send dc set-transformation transform)))
 
   (define (save-frame i dt)
    (define my-bitmap (send my-canvas make-bitmap w h))
