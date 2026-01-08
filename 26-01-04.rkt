@@ -26,7 +26,7 @@
 (define (circle-sdf p r)
   (- (magnitude p) r))
 
-(define (render i j w h)
+(define (render i j w h now)
   (let* (
         [x (/ (- (* 2 i) w) h)]
         [y (/ (- (* 2 j) w) h)]
@@ -47,10 +47,10 @@
     (send dc set-brush bg 'solid)
     (send dc draw-rectangle 0 0 w h)
 
-    (render-bm bm dc scale render))
+    (render-bm bm dc scale render now))
 
 (run-app (lambda (dc w h now) (my-draw dc w h now))
          (make-color 0 0 0 1)
          "26-01-04"
-         2
+         0
          0.1)

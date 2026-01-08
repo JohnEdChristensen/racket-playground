@@ -16,16 +16,16 @@
 (define default-length 10.0)
 (define corner-length (* default-length (sqrt 2)))
 
-(define obstacles (list (segment (vec -100 100) (vec -90 0))
-                        (segment (vec -90 0) (vec -70 -50))
-                        (segment (vec -70 -50) (vec -30 -75))
-                        (segment (vec -30 -75) (vec 0 -75))
-                        (segment (vec 0 -75) (vec 20 -65))
-                        (segment (vec 20 -65) (vec 30 -55))
+(define obstacles (list (segment (vec -100. 100.) (vec -90. 0.))
+                        (segment (vec -90. 0.) (vec -70. -50.))
+                        (segment (vec -70. -50.) (vec -30. -75.))
+                        (segment (vec -30. -75.) (vec 0. -75.))
+                        (segment (vec 0. -75.) (vec 20. -65.))
+                        (segment (vec 20. -65.) (vec 30. -55.))
 
-                        (segment (vec 100 -65) (vec 100 -100))
-                        (segment (vec 100 -100) (vec 140 -100))
-                        (segment (vec 140 -100) (vec 140 -65))
+                        (segment (vec 100. -65.) (vec 100. -100.))
+                        (segment (vec 100. -100.) (vec 140. -100.))
+                        (segment (vec 140. -100.) (vec 140. -65.))
                         ;(segment (vec -100 85) (vec 100 85))
                         ))
 
@@ -33,7 +33,7 @@
                          (let (
                                [x (+ -95.1 (* (car index) default-length))]
                                [y (+ 250.1 (* (car (cdr index)) default-length))])
-                         (particle (vec x y) (vec 0 -60))
+                         (particle (vec x y) (vec 0. -60.))
                          ))
                        (list (list 0 0)
                              (list 0 1)
@@ -84,7 +84,7 @@
 
 (define (combined-spring-force i)
   (foldl v+
-         (vec 0 0)
+         (vec 0. 0.)
          (map (lambda (s)
                         (let* (
                                [i1 (spring-i1 s)]
@@ -103,7 +103,7 @@
          [f-springs (combined-spring-force i)]
          [new-vel (vs 0.9998 (v+ vel
                       (vs dt
-                          (v+ (vec 0 -10)
+                          (v+ (vec 0. -10.)
                               f-springs))))]
          [new-pos (v+ pos (vs dt new-vel))]
          ; return first reflected particle if one exists

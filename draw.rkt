@@ -1,4 +1,5 @@
 #lang racket
+(require math/flonum)
 (require racket/draw/unsafe/cairo
          (only-in ffi/unsafe ptr-ref ptr-set! _uint32)
          racket/require
@@ -8,12 +9,8 @@
                  (regexp-replace #rx"unsafe-" name "")))
           racket/unsafe/ops))
 
-(define (rgb-u32 r g b)
-  ( + (arithmetic-shift r 16)
-      (arithmetic-shift g 8)
-      b))
 
-(define (render-bm bm dc scale render)
+(define (render-bm bm dc scale render now)
   (let ([w (send bm get-width)]
         [h (send bm get-height)]
         [bm-dc (send bm make-dc)]
@@ -21,7 +18,7 @@
     ;render data
     (for* ([x (range w)]
            [y (range h)])
-      (fast-setpixel x y (render x y w h))
+      (fast-setpixel x y (render  x  y (fl w) (fl h) now))
       )
     ;(print (fast-getpixel 32 32))
     ;draw to screen
@@ -58,7 +55,6 @@
         #f)))
 
 
-(provide rgb-u32
-         make-fast-getpixel
+(provide make-fast-getpixel
          make-fast-setpixel
          render-bm)

@@ -38,5 +38,5 @@
 (run-app (lambda (dc w h now) (my-draw dc w h now))
          (make-color 0 0 0 1)
          "26-01-03"
-         400
+         0
          0.1)

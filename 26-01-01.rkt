@@ -30,5 +30,5 @@
     (send dc set-transformation transform)))
 
 ;(run-app (lambda (dc w h) (my-draw dc w h)) bg)
-(run-app (lambda (dc w h now) (my-draw dc w h now)) bg "26-01-01" 10)
+(run-app (lambda (dc w h now) (my-draw dc w h now)) bg "26-01-01" 0)
 
