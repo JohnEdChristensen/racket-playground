@@ -1,0 +1,12 @@
+#lang racket
+(provide watch)
+
+(define (watch path proc)
+  (thread (lambda () (define (loop)
+              (sync (filesystem-change-evt path))
+              (displayln "Edited!")
+                       (proc)
+                       (sleep 0.1)
+                       (loop))
+            (loop)
+              )))
