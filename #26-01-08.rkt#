@@ -1,0 +1,23 @@
+#lang racket
+
+(require "run.rkt"
+         "draw.rkt"
+         "geom.rkt"
+         racket/draw
+         )
+
+(define bg (make-color 0 0 0 1))
+(define fg (make-color 255 255 255 1))
+
+
+(define (my-draw dc w h now)
+  (send dc set-brush bg 'solid)
+  (send dc draw-rectangle 0 0 w h)
+
+)
+
+(run-app (lambda (dc w h now)  (my-draw dc w h now))
+         (make-color 0 0 0 1)
+         "26-01-08"
+         0
+         1.0)

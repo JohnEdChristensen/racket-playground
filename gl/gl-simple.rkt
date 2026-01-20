@@ -5,7 +5,7 @@
          opengl/util
          (only-in opengl glUseProgram)
          "gl-frame.rkt"
-         "watch.rkt")
+         "../watch.rkt")
 
 (define *reload-shaders* #f)
 (watch "./a.frag" (lambda () (set! *reload-shaders* #t)))

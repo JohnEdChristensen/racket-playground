@@ -1,0 +1,45 @@
+#lang racket
+
+(require "run.rkt"
+         "draw.rkt"
+         "geom.rkt"
+         racket/draw
+         racket/draw/arrow
+         )
+
+(define bg (make-color 0 0 0 1))
+(define off (make-color 0 0 0 0))
+(define mg (make-color 150 150 150 1))
+(define fg (make-color 255 255 255 1))
+
+(define (my-draw dc w h now)
+  (send dc set-brush bg 'solid)
+  (send dc set-pen off 1 'transparent)
+  (send dc draw-rectangle 0 0 w h)
+
+  (send dc set-brush off 'transparent)
+  (send dc set-pen fg (/ 2 w) 'solid)
+
+  (send dc translate (/ w 2) (/ h 2))
+  (send dc scale 1 -1)
+
+  ;(send dc scale (/ w 2) (/ w 2))
+
+  (send dc set-pen mg (/ 2 w) 'solid)
+  ; draw axis
+  ;(send dc draw-line 0 -1 0 1)
+  ;(send dc draw-line -1 0 1 0)
+  (send dc set-pen fg (/ 2 w) 'solid)
+
+  (send dc set-brush fg 'solid)
+  (draw-arrow dc 0 0 100 100 0 0); #:arrow-head-size 0.1)
+)
+
+(run-app (lambda (dc w h now)  (my-draw dc w h now))
+         (make-color 0 0 0 1)
+         "26-01-13"
+         0
+         1.0
+         400
+         400
+         )

@@ -1,0 +1,1 @@
+("8.18" ta6le ("59bf12af3f3dfb1635d95bf6caeeb8c78a540cb4" . "dda3703d43d3490e4b0ccad5d3eed028387c5a7b") (collects #"live" #"gl" #"gl-frame.rkt") (collects #"mred" #"main.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"sgl" #"gl-vectors.rkt") (collects #"sgl" #"gl.rkt"))

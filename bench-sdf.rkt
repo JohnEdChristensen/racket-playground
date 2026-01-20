@@ -7,12 +7,6 @@
 (require "perf.rkt")
 (require "sdf.rkt")
 
-(: compute (-> Integer Integer Void))
-(define (compute w h)
-  (for* ([i (range w)]
-        [j (range h)])
-        (render (fl i) (fl j) (fl w) (fl h))
-        ))
 
 (define res-x 256)
 (define res-y 128)
@@ -41,7 +35,6 @@
 (define circle-bench (bench-sdf (lambda ([p : vec]) (circle-sdf p 0.5))))
 (define box-bench (bench-sdf (lambda (p) (box-sdf p (vec 0.5 0.25)))))
 (define ring-bench (bench-sdf (lambda (p) (ring-sdf p (vec 0.0 1.0) 0.5 0.2))))
-(define compute-bench (lambda () (compute res-x res-y)))
 ;(define compute-and-set-bench (lambda () (compute-and-set res-x res-y)))
 
 (define n 10)
@@ -52,7 +45,5 @@
 (print (bench 10 box-bench))
 (print "ring: ")
 (print (bench 10 ring-bench))
-(print "compute: ")
-(print (bench 10 compute-bench))
 ;(print "compute-and-set: ")
 ;(print (bench 10 compute-and-set-bench))

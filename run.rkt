@@ -1,9 +1,14 @@
 #lang racket
 (require racket/gui)
+(require math/flonum)
+(require (only-in "geom.rkt"
+                  vec))
+
 
 (define run-app 
   (lambda (draw color [dir "default"] [frames 0] [dt 0.016] [w 512] [h 512])
     (define running-timer null)
+    (define mouse-pos (vec 0. 0.))
     (define frame (new (class frame%
                          (super-new)
                          (define/augment (on-close)
@@ -21,17 +26,25 @@
   (define (paint-canvas canvas dc)
     (let-values ([(w h) (send canvas get-client-size)]
                  [(transform) (send dc get-transformation)])
-      (draw dc w h (elapsed-time))
+      (send dc set-smoothing 'smoothed)
+      ;(displayln mouse-pos)
+      (draw dc w h (elapsed-time) mouse-pos)
             (send dc set-transformation transform)))
 
   (define (save-frame i dt)
    (define my-bitmap (send my-canvas make-bitmap w h))
-                 (draw (send my-bitmap make-dc) w h  (* i dt))
+                 (draw (send my-bitmap make-dc) w h  (* i dt) mouse-pos)
                  (send my-bitmap save-file 
                        (~a "./anim/" dir "/" i ".png")  
                        'png))
   
-  (define my-canvas (new canvas% [parent frame]
+    (define my-canvas (new (class canvas%
+                             (super-new)
+                             (define/override (on-event e)
+                               (cond ([object? e]
+                                      (set! mouse-pos (vec (fl (send e get-x)) (fl (send e get-y)))))
+                                   )))
+                             [parent frame]
                          [paint-callback paint-canvas]
                          ))
   (send my-canvas set-canvas-background color)
@@ -49,7 +62,7 @@
                '()
                ))]
        [interval 16]))
-  frame
+  (list frame my-canvas)
 ))
 ;;
 ;; (define (save-anim draw color dir)

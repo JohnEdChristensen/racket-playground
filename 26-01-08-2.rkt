@@ -16,21 +16,29 @@
 (define (sdf-sphere p r)
   (- (v3magnitude p) r))
 
-(define (ray-cast p n)
-  (let ([d (sdf-sphere p 1.0)])
-    (cond ((<= n 0)
-           (rgb-u32 0 0 0))
-          ((< d 0.0)
-           (rgb-u32 255 255 255))
-          (else (ray-cast (v3+ p (vec3 0. 0. d)) (- n 1))))))
+(define (sdg-sphere p r)
+  (v3s (/ 1 (v3magnitude p)) p))
+
 
 
 (define (render i j w h now)
+  (define (ray-cast p n)
+    (let ([d (sdf-sphere p 0.5)])
+      (cond ((or (<= n 0) (> (vec3-z p) 1.0))
+             (rgb-u32 0 0 0))
+            ((< d 0.01)
+             (let ([light (max 0.02 (v3dot (v3norm (vec3 (cos now) -1 (sin now)))
+                                           (sdg-sphere p 1.0)))])
+               (rgb-u32
+                (exact-round (* light 255))
+                (exact-round (* light 255))
+                (exact-round (* light 255)))))
+            (else (ray-cast (v3+ p (vec3 0. 0. d)) (- n 1))))))
   (let* ([x (/ (- (* 2 i) w) h)]
         [y (/ (- (* 2 j) w) h)]
         [ray-dir (vec3 0. 0. 1.)]
         [ray-pos (vec3 x y -2)])
-    (ray-cast ray-pos 21)))
+    (ray-cast ray-pos 6)))
 
 
 

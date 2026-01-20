@@ -1,0 +1,1 @@
+("8.18" ta6le ("2e1a52e5dca63e8ff5fb579bdcb4cf6f390754df" . "b34d61993f7b97f12292f0aa943558d6c7eb5c03") (collects #"live" #"draw.rkt") (collects #"live" #"geom.rkt") (collects #"live" #"run.rkt") (collects #"live" #"sdf.rkt") (collects #"racket" #"draw.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

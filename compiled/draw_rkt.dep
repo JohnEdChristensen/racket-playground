@@ -1,0 +1,1 @@
+("8.18" ta6le ("459c27b60ba5b42a66fd75c8289202ad8a88d6a0" . "f8d0ef772ed7d003369f2a4fad5a047e7579343f") (collects #"ffi" #"unsafe.rkt") (collects #"math" #"flonum.rkt") (collects #"racket" #"draw" #"unsafe" #"cairo.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"require.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"racket" #"unsafe" #"ops.rkt"))

@@ -1,0 +1,1 @@
+("8.18" ta6le ("364c9da06689fd3c37296c146ab23f48abadde99" . "d818dd22a7e88f4b1374ddc4ec1e355cefd9890e") (collects #"live" #"run.rkt") (collects #"math" #"main.rkt") (collects #"racket" #"draw.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (indirect collects #"typed-racket" #"rep" #"type-rep.rkt"))
